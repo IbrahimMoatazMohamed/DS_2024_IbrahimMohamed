@@ -12,9 +12,13 @@ public class PhonebookV1 {
             Entry[] entries = FileUtils.readFile(filePath);
 
             System.out.println("Sorting the entries...");
-//            MergeSort.sort(entries);
+
 
             // part 4
+            
+            // Order of compare
+            // name; street_address; city; postcode; country; phone_number
+
             Comparator<Entry> comparator = new Comparator<Entry>() {
                 @Override
                 public int compare(Entry e1, Entry e2) {
@@ -43,6 +47,9 @@ public class PhonebookV1 {
             };
             MergeSort.sort(entries, comparator);
 
+            // If you want to sort my compare, just use the full name and comment line 48.
+            // Then uncomment the next line.
+            // MergeSort.sort(entries);
 
 
 
