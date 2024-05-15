@@ -47,7 +47,7 @@ public class PhonebookV1 {
             };
             MergeSort.sort(entries, comparator);
 
-            // If you want to sort my compare, just use the full name and comment line 48.
+            // If you want to sort by compare just the full name then comment line 48.
             // Then uncomment the next line.
             // MergeSort.sort(entries);
 
