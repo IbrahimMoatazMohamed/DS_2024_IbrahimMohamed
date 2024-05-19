@@ -45,13 +45,9 @@ public class PhonebookV1 {
                     return fullNameCompare;
                 }
             };
-            MergeSort.sort(entries, comparator);
-
-            // If you want to sort by compare just the full name then comment line 48.
-            // Then uncomment the next line.
             // MergeSort.sort(entries);
-
-
+            
+            MergeSort.sort(entries, comparator);
 
             System.out.println("Saving the entries...");
             FileUtils.writeToFile(entries, "sorted_entries.csv");
