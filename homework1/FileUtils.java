@@ -6,7 +6,6 @@ import java.util.List;
 public class FileUtils {
 
     public static Entry[] readFile(String filePath) throws FileNotFoundException {
-        // implement the actual logic (remove next line)
         List<Entry> entryList = new ArrayList<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
@@ -39,11 +38,7 @@ public class FileUtils {
     }
 
     public static void writeToFile(Entry[] entries, String filePath) throws IOException {
-        // implement the actual logic
         BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
-
-        // Optionally, write the header
-        // bw.write("name;street_address;city;postcode;country;phone_number\n");
 
         for (int i = 0; i < entries.length; i++) {
             Entry entry = entries[i];
