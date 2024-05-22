@@ -1,21 +1,8 @@
 package homework2;
 
 public class ProcessQueue {
-    public Process[] pq;
-    public int length;
-
-    public ProcessQueue(ProcessQueue other) {
-        this.length = other.length;
-        this.pq = new Process[other.pq.length];
-        for (int i = 1; i <= other.length; i++) {
-            this.pq[i] = other.pq[i];
-        }
-    }
-
-    public ProcessQueue() {
-        this.length = 0;
-        this.pq = new Process[2];
-    }
+    public Process[] pq = new Process[2];
+    public int length = 0;
 
     public Process peekNextProcess() {
         return pq[1];
@@ -47,7 +34,6 @@ public class ProcessQueue {
         sink(1);
         return min;
     }
-
 
     private void swim(int k) {
         while (k > 1 && less(k, k / 2)) {
@@ -81,9 +67,6 @@ public class ProcessQueue {
 
             int swapPos = less(leftChild, rightChild) ? leftChild : rightChild;
 
-//            if (rightChild <= length)
-//                swapPos = less(leftChild, rightChild) ? leftChild : rightChild;
-
             if (less(leftChild, k) || less(rightChild, k)) {
                 swap(k, swapPos);
             }
@@ -95,21 +78,15 @@ public class ProcessQueue {
         return length == 0;
     }
 
-    public int size() {
-        return length;
-    }
-
-
-    private static Process[] clonePQ(ProcessQueue origin) {
-        Process[] temp = new Process[origin.pq.length];
-        for (int i = 1; i < origin.pq.length; i++) {
-            temp[i] = origin.pq[i];
-        }
-        return temp;
-    }
-
     public static Process popCurrentProcess(int time, ProcessQueue origin) {
-        ProcessQueue copy = new ProcessQueue(origin);
+//        copy origin to runNextProcess without damage
+        ProcessQueue copy = new ProcessQueue();
+
+        copy.length = origin.length;
+        copy.pq = new Process[origin.pq.length];
+        for (int i = 1; i <= origin.length; i++) {
+            copy.pq[i] = origin.pq[i];
+        }
 
         Process result = copy.runNextProcess();
 
@@ -124,10 +101,8 @@ public class ProcessQueue {
     }
 
     public int decrementBurstTime(Process process, ProcessQueue origin) {
-        Process[] copy = clonePQ(origin);
-
-        for (int index = 1; index <= copy.length; index++) {
-            Process result = copy[index];
+        for (int index = 1; index <= origin.length; index++) {
+            Process result = origin.pq[index];
 
             if (result.equals(process)) {
                 pq[index].decrementBurstTime();

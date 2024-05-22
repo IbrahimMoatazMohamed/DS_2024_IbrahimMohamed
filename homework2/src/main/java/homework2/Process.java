@@ -30,11 +30,6 @@ public class Process implements Comparable<Process> {
     }
 
     @Override
-    public String toString() {
-        return "name= " + name;
-    }
-
-    @Override
     public int compareTo(Process other) {
         int cmpPriority = Integer.compare(priority, other.priority);
 
