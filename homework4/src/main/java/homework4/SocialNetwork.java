@@ -25,9 +25,14 @@ public class SocialNetwork {
                 continue;
             }
             String[] splitLine = line.split(";");
-            addUser(splitLine[0]);
-            Friendship f = new Friendship(splitLine[0], splitLine[1], splitLine[2]);
-            addFriendship(f);
+
+            String friend1 = splitLine[0];
+            String friend2 = splitLine[1];
+            double friendshipStrength = Double.parseDouble(splitLine[2]);
+
+            addUser(friend1);
+            addUser(friend2);
+            addFriendship(new Friendship(friend1, friend2, friendshipStrength));
         }
     }
 
@@ -39,16 +44,11 @@ public class SocialNetwork {
     }
 
     public void addFriendship(Friendship f) {
-        ArrayList<Friendship> list1 = adj.getOrDefault(f.getFriend1(), new ArrayList<>());
-        list1.add(f);
-        adj.put(f.getFriend1(), list1);
+        String friend1 = f.getFriend1();
+        String friend2 = f.getFriend2();
 
-        if(!adj.containsKey(f.getFriend2())){
-            addUser(f.getFriend2());
-        }
-        ArrayList<Friendship> list2 = adj.get(f.getFriend2());
-        list1.add(new Friendship(f.getFriend2(), f.getFriend1(), f.getFriendship_strength()));
-        adj.put(f.getFriend2(), list2);
+        adj.get(friend1).add(f);
+        adj.get(friend2).add(new Friendship(friend2, friend1, f.getFriendship_strength()));
 
         E++;
     }
